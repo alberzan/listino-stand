@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Parrocchia di Castelvetro</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+        <style>
+            body {
+                font-family: sans-serif;
+                margin: 20px;
+                background-color: #f4f4f4;
+            }
+            .container {
+                max-width: 600px;
+                margin: auto;
+                background-color: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                text-align: center;
+            }
+            .product-list {
+                max-width: 600px;
+                margin: auto;
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                border-bottom: 3px solid #eee;
+            }
+            .product-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 0;
+                border-bottom: 1px solid #eee;
+            }
+            .product-item:last-child {
+                border-bottom: none;
+            }
+            .product-info {
+                flex-grow: 1;
+            }
+            .product-name {
+                font-weight: bold;
+                font-size: 1.1em;
+            }
+            .product-price {
+                color: #555;
+                margin-top: 5px;
+            }
+            .quantity-control {
+                display: flex;
+                align-items: center;
+            }
+            .quantity-control button {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                padding: 5px 10px;
+                cursor: pointer;
+                font-size: 1.2em;
+                border-radius: 4px;
+                transition: background-color 0.3s;
+            }
+            .quantity-control button:hover {
+                background-color: #0056b3;
+            }
+            .quantity-control button:disabled {
+                background-color: #cccccc;
+            }
+            .quantity-input {
+                width: 20px;
+                text-align: right;
+                border: 1px solid #ccc;
+                margin: 0 8px;
+                border-radius: 4px;
+            }
+            .input-group {
+                margin-bottom: 20px;
+            }
+            h1 {
+                color: #333;
+                text-align: center;
+            }
+            h2 {
+                color: #333;
+                text-decoration: underline;
+            }
+            #textInput {
+                padding: 10px;
+                width: 90%;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 16px;
+            }
+            #generateBtn {
+                padding: 10px 20px;
+                border: none;
+                background-color: #007bff;
+                color: white;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                margin-top: 10px;
+            }
+            #generateBtn:hover {
+                background-color: #0056b3;
+            }
+            #qrcode {
+                width: 100%;
+                background-color: white;
+                margin-top: 20px;
+                padding: 0px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                display: inline-block;
+            }
+            #qrcode img{
+                width: 100%;
+                height: auto;
+            }
+        </style>
+    </head>
+    <body>
+
+        <h1>Listino prezzi</h1>
+
+                <div class="product-list">
+            <h2>Tigella</h2>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Tigella vuota</div>
+                    <div class="product-price">€ 0,70</div>
+                </div>
+                <div id="3" class="quantity-control">
+                    <button id="3-minus" disabled onclick="changeQuantity('3', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="3-plus" onclick="changeQuantity('3', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Tigella con Lardo</div>
+                    <div class="product-price">€ 1,80</div>
+                </div>
+                <div id="4" class="quantity-control">
+                    <button id="4-minus" disabled onclick="changeQuantity('4', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="4-plus" onclick="changeQuantity('4', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Tigella con Prosciutto Crudo</div>
+                    <div class="product-price">€ 2,20</div>
+                </div>
+                <div id="54" class="quantity-control">
+                    <button id="54-minus" disabled onclick="changeQuantity('54', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="54-plus" onclick="changeQuantity('54', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Tigella con Prosciutto Cotto</div>
+                    <div class="product-price">€ 1,80</div>
+                </div>
+                <div id="62" class="quantity-control">
+                    <button id="62-minus" disabled onclick="changeQuantity('62', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="62-plus" onclick="changeQuantity('62', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Tigella con Ciccioli</div>
+                    <div class="product-price">€ 1,80</div>
+                </div>
+                <div id="49" class="quantity-control">
+                    <button id="49-minus" disabled onclick="changeQuantity('49', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="49-plus" onclick="changeQuantity('49', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Tigella con Pancetta</div>
+                    <div class="product-price">€ 1,80</div>
+                </div>
+                <div id="50" class="quantity-control">
+                    <button id="50-minus" disabled onclick="changeQuantity('50', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="50-plus" onclick="changeQuantity('50', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Tigella con Salame</div>
+                    <div class="product-price">€ 1,80</div>
+                </div>
+                <div id="51" class="quantity-control">
+                    <button id="51-minus" disabled onclick="changeQuantity('51', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="51-plus" onclick="changeQuantity('51', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Tigella con Nutella</div>
+                    <div class="product-price">€ 1,50</div>
+                </div>
+                <div id="52" class="quantity-control">
+                    <button id="52-minus" disabled onclick="changeQuantity('52', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="52-plus" onclick="changeQuantity('52', 1)">+</button>
+                </div>
+            </div>
+        </div>
+        <div class="product-list">
+            <h2>Gnocco fritto</h2>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Gnocco fritto singolo vuoto</div>
+                    <div class="product-price">€ 0,80</div>
+                </div>
+                <div id="5" class="quantity-control">
+                    <button id="5-minus" disabled onclick="changeQuantity('5', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="5-plus" onclick="changeQuantity('5', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Gnocco da passeggio</div>
+                    <div class="product-price">€ 2,00</div>
+                </div>
+                <div id="150" class="quantity-control">
+                    <button id="150-minus" disabled onclick="changeQuantity('150', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="150-plus" onclick="changeQuantity('150', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Gnocco fritto doppio con Crudo</div>
+                    <div class="product-price">€ 3,50</div>
+                </div>
+                <div id="58" class="quantity-control">
+                    <button id="58-minus" disabled onclick="changeQuantity('58', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="58-plus" onclick="changeQuantity('58', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Gnocco fritto doppio con Cotto</div>
+                    <div class="product-price">€ 2,70</div>
+                </div>
+                <div id="65" class="quantity-control">
+                    <button id="65-minus" disabled onclick="changeQuantity('65', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="65-plus" onclick="changeQuantity('65', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Gnocco fritto doppio con Ciccioli</div>
+                    <div class="product-price">€ 2,70</div>
+                </div>
+                <div id="6" class="quantity-control">
+                    <button id="6-minus" disabled onclick="changeQuantity('6', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="6-plus" onclick="changeQuantity('6', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Gnocco fritto doppio con Salame</div>
+                    <div class="product-price">€ 2,70</div>
+                </div>
+                <div id="56" class="quantity-control">
+                    <button id="56-minus" disabled onclick="changeQuantity('56', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="56-plus" onclick="changeQuantity('56', 1)">+</button>
+                </div>
+            </div>
+        </div>
+        <div class="product-list">
+            <h2>Porzione</h2>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Porzione di Lardo e Parmigiano</div>
+                    <div class="product-price">€ 2,50</div>
+                </div>
+                <div id="66" class="quantity-control">
+                    <button id="66-minus" disabled onclick="changeQuantity('66', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="66-plus" onclick="changeQuantity('66', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Salume misto</div>
+                    <div class="product-price">€ 3,50</div>
+                </div>
+                <div id="149" class="quantity-control">
+                    <button id="149-minus" disabled onclick="changeQuantity('149', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="149-plus" onclick="changeQuantity('149', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Porzione di Prosc. Crudo (100 gr)</div>
+                    <div class="product-price">€ 5,00</div>
+                </div>
+                <div id="70" class="quantity-control">
+                    <button id="70-minus" disabled onclick="changeQuantity('70', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="70-plus" onclick="changeQuantity('70', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Porzione di Prosc. Cotto (100 gr)</div>
+                    <div class="product-price">€ 3,50</div>
+                </div>
+                <div id="71" class="quantity-control">
+                    <button id="71-minus" disabled onclick="changeQuantity('71', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="71-plus" onclick="changeQuantity('71', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Porzione di Ciccioli (100 gr)</div>
+                    <div class="product-price">€ 3,50</div>
+                </div>
+                <div id="67" class="quantity-control">
+                    <button id="67-minus" disabled onclick="changeQuantity('67', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="67-plus" onclick="changeQuantity('67', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Porzione di Pancetta (100 gr)</div>
+                    <div class="product-price">€ 3,50</div>
+                </div>
+                <div id="72" class="quantity-control">
+                    <button id="72-minus" disabled onclick="changeQuantity('72', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="72-plus" onclick="changeQuantity('72', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Porzione di Salame (100 gr)</div>
+                    <div class="product-price">€ 3,50</div>
+                </div>
+                <div id="68" class="quantity-control">
+                    <button id="68-minus" disabled onclick="changeQuantity('68', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="68-plus" onclick="changeQuantity('68', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Porzione di Stracchino</div>
+                    <div class="product-price">€ 2,50</div>
+                </div>
+                <div id="69" class="quantity-control">
+                    <button id="69-minus" disabled onclick="changeQuantity('69', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="69-plus" onclick="changeQuantity('69', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Nutella in vaschetta</div>
+                    <div class="product-price">€ 1,00</div>
+                </div>
+                <div id="73" class="quantity-control">
+                    <button id="73-minus" disabled onclick="changeQuantity('73', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="73-plus" onclick="changeQuantity('73', 1)">+</button>
+                </div>
+            </div>
+        </div>
+        <div class="product-list">
+            <h2>Bevanda / Bar</h2>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Birra lattina (50 cl)</div>
+                    <div class="product-price">€ 4,00</div>
+                </div>
+                <div id="136" class="quantity-control">
+                    <button id="136-minus" disabled onclick="changeQuantity('136', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="136-plus" onclick="changeQuantity('136', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Pignoletto Bottiglia</div>
+                    <div class="product-price">€ 8,60</div>
+                </div>
+                <div id="86" class="quantity-control">
+                    <button id="86-minus" disabled onclick="changeQuantity('86', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="86-plus" onclick="changeQuantity('86', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Lambrusco Bottiglia</div>
+                    <div class="product-price">€ 8,50</div>
+                </div>
+                <div id="84" class="quantity-control">
+                    <button id="84-minus" disabled onclick="changeQuantity('84', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="84-plus" onclick="changeQuantity('84', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Lambrusco bicchiere</div>
+                    <div class="product-price">€ 2,00</div>
+                </div>
+                <div id="83" class="quantity-control">
+                    <button id="83-minus" disabled onclick="changeQuantity('83', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="83-plus" onclick="changeQuantity('83', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Pignoletto bicchiere</div>
+                    <div class="product-price">€ 2,00</div>
+                </div>
+                <div id="85" class="quantity-control">
+                    <button id="85-minus" disabled onclick="changeQuantity('85', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="85-plus" onclick="changeQuantity('85', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Mezza naturale</div>
+                    <div class="product-price">€ 1,00</div>
+                </div>
+                <div id="31" class="quantity-control">
+                    <button id="31-minus" disabled onclick="changeQuantity('31', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="31-plus" onclick="changeQuantity('31', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Mezza frizzante</div>
+                    <div class="product-price">€ 1,00</div>
+                </div>
+                <div id="32" class="quantity-control">
+                    <button id="32-minus" disabled onclick="changeQuantity('32', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="32-plus" onclick="changeQuantity('32', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Birra lattina (33 cl)</div>
+                    <div class="product-price">€ 3,00</div>
+                </div>
+                <div id="30" class="quantity-control">
+                    <button id="30-minus" disabled onclick="changeQuantity('30', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="30-plus" onclick="changeQuantity('30', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Cocacola lattina (33 cl)</div>
+                    <div class="product-price">€ 3,00</div>
+                </div>
+                <div id="2" class="quantity-control">
+                    <button id="2-minus" disabled onclick="changeQuantity('2', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="2-plus" onclick="changeQuantity('2', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Fanta lattina (33 cl)</div>
+                    <div class="product-price">€ 3,00</div>
+                </div>
+                <div id="29" class="quantity-control">
+                    <button id="29-minus" disabled onclick="changeQuantity('29', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="29-plus" onclick="changeQuantity('29', 1)">+</button>
+                </div>
+            </div>
+        </div>
+        <div class="product-list">
+            <h2>Dolce</h2>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Torta fetta</div>
+                    <div class="product-price">€ 2,50</div>
+                </div>
+                <div id="101" class="quantity-control">
+                    <button id="101-minus" disabled onclick="changeQuantity('101', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="101-plus" onclick="changeQuantity('101', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Caffè espresso</div>
+                    <div class="product-price">€ 1,00</div>
+                </div>
+                <div id="79" class="quantity-control">
+                    <button id="79-minus" disabled onclick="changeQuantity('79', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="79-plus" onclick="changeQuantity('79', 1)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="input-group">
+                <input type="text" id="textInput" placeholder="Nominativo per la chiamata" value="">
+                <button id="generateBtn">Genera QR Code da mostrare alla cassa</button>
+            </div>
+
+            <div id="qrcode"></div>
+        </div>
+
+        <script>
+            function changeQuantity(id, delta) {
+                const quantityControl = document.getElementById(id);
+                const minusButton = document.getElementById(id + '-minus');
+                const input = quantityControl.querySelector('.quantity-input');
+                let currentValue = parseInt(input.value);
+
+                // Ensure the value is not less than zero
+                const newValue = currentValue + delta;
+                if (newValue >= 0) {
+                    input.value = newValue;
+                    // in case of changes the QR must be invalidated
+                    const qrcodeDiv = document.getElementById('qrcode');
+                    qrcodeDiv.innerHTML = "";
+                }
+                minusButton.disabled = (newValue <= 0);
+            }
+            document.addEventListener('DOMContentLoaded', () => {
+                const textInput = document.getElementById('textInput');
+                const generateBtn = document.getElementById('generateBtn');
+                const qrcodeDiv = document.getElementById('qrcode');
+                let qrcode = null;
+
+                function generateQRCode() {
+                    qrcodeDiv.innerHTML = "";
+                    var filteredArray = document.getElementsByClassName("quantity-control");
+                    const quantytyMap = new Map();
+                    for (const el of filteredArray) {
+                        let currentValue = parseInt(el.querySelector('.quantity-input').value);
+                        if (currentValue > 0) {
+                            var currVal = quantytyMap.get(currentValue) || '';
+                            quantytyMap.set(currentValue, currVal + '-' + el.id);
+                        }
+                    }
+                    var ordineStreamPart = '';
+                    quantytyMap.forEach(function (value, key) {
+                        ordineStreamPart += '|' + key + value;
+                    })
+                    if (!ordineStreamPart) {
+                        console.warn("QR generation impossible: not enough values");
+                    } else {
+                        var finalStream = Base64.encode(textInput.value) + ordineStreamPart;
+                        console.log("finalStream = " + finalStream);
+                        qrcode = new QRCode(qrcodeDiv, {
+                            text: finalStream,
+                            width: 256,
+                            height: 384,
+                            colorDark: "#000000",
+                            colorLight: "#ffffff",
+                            correctLevel: QRCode.CorrectLevel.H
+                        });
+                    }
+                }
+
+                generateBtn.addEventListener('click', generateQRCode);
+            });
+
+            var Base64 = {_keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", encode: function (e) {
+                    var t = "";
+                    var n, r, i, s, o, u, a;
+                    var f = 0;
+                    e = Base64._utf8_encode(e);
+                    while (f < e.length) {
+                        n = e.charCodeAt(f++);
+                        r = e.charCodeAt(f++);
+                        i = e.charCodeAt(f++);
+                        s = n >> 2;
+                        o = (n & 3) << 4 | r >> 4;
+                        u = (r & 15) << 2 | i >> 6;
+                        a = i & 63;
+                        if (isNaN(r)) {
+                            u = a = 64
+                        } else if (isNaN(i)) {
+                            a = 64
+                        }
+                        t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr.charAt(u) + this._keyStr.charAt(a)
+                    }
+                    return t
+                }, decode: function (e) {
+                    var t = "";
+                    var n, r, i;
+                    var s, o, u, a;
+                    var f = 0;
+                    e = e.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+                    while (f < e.length) {
+                        s = this._keyStr.indexOf(e.charAt(f++));
+                        o = this._keyStr.indexOf(e.charAt(f++));
+                        u = this._keyStr.indexOf(e.charAt(f++));
+                        a = this._keyStr.indexOf(e.charAt(f++));
+                        n = s << 2 | o >> 4;
+                        r = (o & 15) << 4 | u >> 2;
+                        i = (u & 3) << 6 | a;
+                        t = t + String.fromCharCode(n);
+                        if (u != 64) {
+                            t = t + String.fromCharCode(r)
+                        }
+                        if (a != 64) {
+                            t = t + String.fromCharCode(i)
+                        }
+                    }
+                    t = Base64._utf8_decode(t);
+                    return t
+                }, _utf8_encode: function (e) {
+                    e = e.replace(/\r\n/g, "\n");
+                    var t = "";
+                    for (var n = 0; n < e.length; n++) {
+                        var r = e.charCodeAt(n);
+                        if (r < 128) {
+                            t += String.fromCharCode(r)
+                        } else if (r > 127 && r < 2048) {
+                            t += String.fromCharCode(r >> 6 | 192);
+                            t += String.fromCharCode(r & 63 | 128)
+                        } else {
+                            t += String.fromCharCode(r >> 12 | 224);
+                            t += String.fromCharCode(r >> 6 & 63 | 128);
+                            t += String.fromCharCode(r & 63 | 128)
+                        }
+                    }
+                    return t
+                }, _utf8_decode: function (e) {
+                    var t = "";
+                    var n = 0;
+                    var r = c1 = c2 = 0;
+                    while (n < e.length) {
+                        r = e.charCodeAt(n);
+                        if (r < 128) {
+                            t += String.fromCharCode(r);
+                            n++
+                        } else if (r > 191 && r < 224) {
+                            c2 = e.charCodeAt(n + 1);
+                            t += String.fromCharCode((r & 31) << 6 | c2 & 63);
+                            n += 2
+                        } else {
+                            c2 = e.charCodeAt(n + 1);
+                            c3 = e.charCodeAt(n + 2);
+                            t += String.fromCharCode((r & 15) << 12 | (c2 & 63) << 6 | c3 & 63);
+                            n += 3
+                        }
+                    }
+                    return t
+                }}
+
+        </script>
+
+    </body>
+</html>
