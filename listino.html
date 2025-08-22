@@ -109,17 +109,12 @@
                 background-color: #0056b3;
             }
             #qrcode {
-                width: 100%;
                 background-color: white;
                 margin-top: 20px;
                 padding: 0px;
                 border: 1px solid #ccc;
                 border-radius: 5px;
                 display: inline-block;
-            }
-            #qrcode img{
-                width: 100%;
-                height: auto;
             }
         </style>
     </head>
@@ -415,6 +410,17 @@
             </div>
             <div class="product-item">
                 <div class="product-info">
+                    <div class="product-name">Mezza frizzante</div>
+                    <div class="product-price">€ 1,00</div>
+                </div>
+                <div id="32" class="quantity-control">
+                    <button id="32-minus" disabled onclick="changeQuantity('32', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="32-plus" onclick="changeQuantity('32', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
                     <div class="product-name">Lambrusco Bottiglia</div>
                     <div class="product-price">€ 8,50</div>
                 </div>
@@ -455,17 +461,6 @@
                     <button id="31-minus" disabled onclick="changeQuantity('31', -1)">-</button>
                     <input type="text" class="quantity-input" value="0" readonly>
                     <button id="31-plus" onclick="changeQuantity('31', 1)">+</button>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="product-info">
-                    <div class="product-name">Mezza frizzante</div>
-                    <div class="product-price">€ 1,00</div>
-                </div>
-                <div id="32" class="quantity-control">
-                    <button id="32-minus" disabled onclick="changeQuantity('32', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="32-plus" onclick="changeQuantity('32', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
