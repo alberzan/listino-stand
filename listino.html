@@ -421,6 +421,17 @@
             </div>
             <div class="product-item">
                 <div class="product-info">
+                    <div class="product-name">Fanta lattina (33 cl)</div>
+                    <div class="product-price">€ 3,00</div>
+                </div>
+                <div id="29" class="quantity-control">
+                    <button id="29-minus" disabled onclick="changeQuantity('29', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="29-plus" onclick="changeQuantity('29', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
                     <div class="product-name">Lambrusco Bottiglia</div>
                     <div class="product-price">€ 8,50</div>
                 </div>
@@ -483,17 +494,6 @@
                     <button id="2-minus" disabled onclick="changeQuantity('2', -1)">-</button>
                     <input type="text" class="quantity-input" value="0" readonly>
                     <button id="2-plus" onclick="changeQuantity('2', 1)">+</button>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="product-info">
-                    <div class="product-name">Fanta lattina (33 cl)</div>
-                    <div class="product-price">€ 3,00</div>
-                </div>
-                <div id="29" class="quantity-control">
-                    <button id="29-minus" disabled onclick="changeQuantity('29', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="29-plus" onclick="changeQuantity('29', 1)">+</button>
                 </div>
             </div>
         </div>
@@ -568,7 +568,7 @@
                     }
                     var ordineStreamPart = '';
                     quantytyMap.forEach(function (value, key) {
-                        ordineStreamPart += '|' + key + value;
+                        ordineStreamPart += ' ' + key + value;
                     })
                     if (!ordineStreamPart) {
                         console.warn("QR generation impossible: not enough values");
