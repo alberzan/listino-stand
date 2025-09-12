@@ -77,8 +77,13 @@
                 margin: 0 8px;
                 border-radius: 4px;
             }
-            .input-group {
+            .input-group-centered {
                 margin-bottom: 20px;
+                text-align: center;
+            }
+            .input-group-left {
+                margin-bottom: 20px;
+                text-align: left;
             }
             .qrcontainer {
                 position: relative;
@@ -124,7 +129,7 @@
                 text-align: center;
                 text-decoration: underline;
             }
-            #textInput {
+            #nominativoInput {
                 padding: 10px;
                 width: 90%;
                 border: 1px solid #ccc;
@@ -708,12 +713,34 @@
             </div>
         </div>
 
-        <div class="container">
-            <div class="input-group">
-                <input type="text" id="textInput" placeholder="Nominativo per la chiamata" value="">
+        <div class="product-list">
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Coperto</div>
+                    <div class="product-price">€ 1,00</div>
+                </div>
+                <div id="153" class="quantity-control">
+                    <button id="153-minus" disabled onclick="changeQuantity('153', -1)">-</button>
+                    <input type="text" class="quantity-input" value="0" readonly>
+                    <button id="153-plus" onclick="changeQuantity('153', 1)">+</button>
+                </div>
             </div>
-            <div class="input-group">
-                <button id="generateBtn">Genera QR Code da mostrare alla cassa</button>
+        </div>
+        
+        <div class="container">
+            <div class="input-group-left">
+                <input type="radio" id="SED" name="tavolo_asporto" value="SED">
+                <label for="SED">Ci sediamo al tavolo</label><br />
+                <input type="radio" id="ASP" name="tavolo_asporto" value="ASP">
+                <label for="ASP">Asporto</label><br />
+                <input type="radio" id="INT" name="tavolo_asporto" value="INT">
+                <label for="INT">Siamo già seduti (integrazione)</label>
+             </div>
+            <div class="input-group-centered">
+                <input type="text" id="nominativoInput" placeholder="Nominativo per la chiamata" value="">
+            </div>
+            <div class="input-group-centered">
+                <button id="generateQrBtn">Genera QR Code da mostrare alla cassa</button>
             </div>
         </div>
         <div class="qrcontainer">
@@ -725,6 +752,56 @@
         </div>
 
         <script>
+            const nominativoInput = document.getElementById('nominativoInput');
+            const generateQrBtn = document.getElementById('generateQrBtn');
+            const qrcodeDiv = document.getElementById('qrcode');
+            const tavoloAsportoRadioArray = document.getElementsByName('tavolo_asporto');
+            const sedutiRadioEl = document.getElementById('SED');
+            const copertoQuantityControl = document.getElementById('153');
+            const copertoMinusButton = document.getElementById('153-minus');
+            var copertoQuantityBackup;
+
+            function isNotNullDefined(pElement) {
+                return (pElement !== null && pElement !== "undefined");
+            }
+            function getTavoloAsportoRadioValue() {
+                var retval = '';
+                if (isNotNullDefined(tavoloAsportoRadioArray)) {
+                    for (var i = 0; i < tavoloAsportoRadioArray.length; i++) {
+                        if (tavoloAsportoRadioArray[i].checked) {
+                            retval = tavoloAsportoRadioArray[i].value;
+                            break;
+                        }
+                    }
+                }
+                return retval;
+            }
+            function setRadioSeduti(pHasToBeSelected) {
+                if (isNotNullDefined(sedutiRadioEl) && isNotNullDefined(tavoloAsportoRadioArray)) {
+                    if (pHasToBeSelected && !sedutiRadioEl.checked) {
+                        sedutiRadioEl.checked = true;
+                    } else if (!pHasToBeSelected && sedutiRadioEl.checked) {
+                        copertoQuantityBackup = 1;
+                        for (var i = 0; i < tavoloAsportoRadioArray.length; i++) {
+                            if (tavoloAsportoRadioArray[i] !== sedutiRadioEl) {
+                                tavoloAsportoRadioArray[i].checked = true;
+                                break;
+                             }
+                        }
+                    }
+                }
+            }
+            function setQuantityCoperto(pNewQuantity) {
+                if (isNotNullDefined(copertoQuantityControl) && isNotNullDefined(copertoMinusButton)) {
+                    const copertoInput = copertoQuantityControl.querySelector('.quantity-input');
+                    if (isNotNullDefined(copertoInput)) {
+                        if (pNewQuantity === 0 && copertoInput.value > 0) {
+                            copertoQuantityBackup = copertoInput.value;
+                        }
+                        setNewQuantity(copertoInput, copertoMinusButton, pNewQuantity);
+                    }
+                }
+            }
             function changeQuantity(id, delta) {
                 const quantityControl = document.getElementById(id);
                 const minusButton = document.getElementById(id + '-minus');
@@ -734,18 +811,23 @@
                 // Ensure the value is not less than zero
                 const newValue = currentValue + delta;
                 if (newValue >= 0) {
-                    input.value = newValue;
-                    // in case of changes the QR must be invalidated
-                    const qrcodeDiv = document.getElementById('qrcode');
-                    qrcodeDiv.innerHTML = "";
+                    setNewQuantity(input, minusButton, newValue);
                 }
-                minusButton.disabled = (newValue <= 0);
+                if (id === '153') {
+                    setRadioSeduti((newValue > 0));
+                }
+            }
+            function setNewQuantity(pInputText, pMinusButton, pNewQuantity) {
+                pInputText.value = pNewQuantity;
+                // in case of changes the QR must be invalidated
+                qrcodeDiv.innerHTML = "";
+                pMinusButton.disabled = (pNewQuantity <= 0);
             }
             document.addEventListener('DOMContentLoaded', () => {
-                const textInput = document.getElementById('textInput');
-                const generateBtn = document.getElementById('generateBtn');
-                const qrcodeDiv = document.getElementById('qrcode');
                 let qrcode = null;
+                copertoQuantityBackup = 1;
+                setQuantityCoperto(1);
+                setRadioSeduti(true);
 
                 function generateQRCode() {
                     qrcodeDiv.innerHTML = "";
@@ -761,11 +843,11 @@
                     var ordineStreamPart = '';
                     quantytyMap.forEach(function (value, key) {
                         ordineStreamPart += ' ' + key + value;
-                    })
+                    });
                     if (!ordineStreamPart) {
                         console.warn("QR generation impossible: not enough values");
                     } else {
-                        var finalStream = Base64.encode(textInput.value) + ordineStreamPart;
+                        var finalStream = Base64.encode(nominativoInput.value) + '-' + getTavoloAsportoRadioValue() + ordineStreamPart;
                         console.log("finalStream = " + finalStream);
                         qrcode = new QRCode(qrcodeDiv, {
                             text: finalStream,
@@ -778,7 +860,14 @@
                     }
                 }
 
-                generateBtn.addEventListener('click', generateQRCode);
+                generateQrBtn.addEventListener('click', generateQRCode);
+                for (var i = 0; i < tavoloAsportoRadioArray.length; i++) {                    
+                    tavoloAsportoRadioArray[i].addEventListener('change', function() {
+                        var quantitaCoperti = (this.value === "SED")? copertoQuantityBackup : 0;
+                        setQuantityCoperto(quantitaCoperti);
+                    });
+                }
+
             });
 
             var Base64 = {_keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", encode: function (e) {
@@ -795,13 +884,13 @@
                         u = (r & 15) << 2 | i >> 6;
                         a = i & 63;
                         if (isNaN(r)) {
-                            u = a = 64
+                            u = a = 64;
                         } else if (isNaN(i)) {
-                            a = 64
+                            a = 64;
                         }
-                        t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr.charAt(u) + this._keyStr.charAt(a)
+                        t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr.charAt(u) + this._keyStr.charAt(a);
                     }
-                    return t
+                    return t;
                 }, decode: function (e) {
                     var t = "";
                     var n, r, i;
@@ -817,32 +906,32 @@
                         r = (o & 15) << 4 | u >> 2;
                         i = (u & 3) << 6 | a;
                         t = t + String.fromCharCode(n);
-                        if (u != 64) {
-                            t = t + String.fromCharCode(r)
+                        if (u !== 64) {
+                            t = t + String.fromCharCode(r);
                         }
-                        if (a != 64) {
-                            t = t + String.fromCharCode(i)
+                        if (a !== 64) {
+                            t = t + String.fromCharCode(i);
                         }
                     }
                     t = Base64._utf8_decode(t);
-                    return t
+                    return t;
                 }, _utf8_encode: function (e) {
                     e = e.replace(/\r\n/g, "\n");
                     var t = "";
                     for (var n = 0; n < e.length; n++) {
                         var r = e.charCodeAt(n);
                         if (r < 128) {
-                            t += String.fromCharCode(r)
+                            t += String.fromCharCode(r);
                         } else if (r > 127 && r < 2048) {
                             t += String.fromCharCode(r >> 6 | 192);
-                            t += String.fromCharCode(r & 63 | 128)
+                            t += String.fromCharCode(r & 63 | 128);
                         } else {
                             t += String.fromCharCode(r >> 12 | 224);
                             t += String.fromCharCode(r >> 6 & 63 | 128);
-                            t += String.fromCharCode(r & 63 | 128)
+                            t += String.fromCharCode(r & 63 | 128);
                         }
                     }
-                    return t
+                    return t;
                 }, _utf8_decode: function (e) {
                     var t = "";
                     var n = 0;
@@ -851,20 +940,20 @@
                         r = e.charCodeAt(n);
                         if (r < 128) {
                             t += String.fromCharCode(r);
-                            n++
+                            n++;
                         } else if (r > 191 && r < 224) {
                             c2 = e.charCodeAt(n + 1);
                             t += String.fromCharCode((r & 31) << 6 | c2 & 63);
-                            n += 2
+                            n += 2;
                         } else {
                             c2 = e.charCodeAt(n + 1);
                             c3 = e.charCodeAt(n + 2);
                             t += String.fromCharCode((r & 15) << 12 | (c2 & 63) << 6 | c3 & 63);
-                            n += 3
+                            n += 3;
                         }
                     }
-                    return t
-                }}
+                    return t;
+                }};
 
         </script>
 
