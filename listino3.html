@@ -169,7 +169,7 @@
 </div>
 <div class="quantity-control" id="3">
 <button disabled="" id="3-minus" onclick="changeQuantity('3', -1)">-</button>
-<input class="quantity-input" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="0"/>
+<input class="quantity-input" type="text" pattern="\d*" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="0"/>
 <button id="3-plus" onclick="changeQuantity('3', 1)">+</button>
 </div>
 </div>
@@ -179,8 +179,8 @@
 <div class="product-price">€ 1,50</div>
 </div>
 <div class="quantity-control" id="4">
-<button disabled="" id="4-minus" onclick="changeQuantity('4', -1)">-</button>
-<input class="quantity-input" readonly="" type="text" value="0"/>
+<button id="4-minus" onclick="changeQuantity('4', -1)">-</button>
+<input class="quantity-input" type="text" pattern="\d*" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="0"/>
 <button id="4-plus" onclick="changeQuantity('4', 1)">+</button>
 </div>
 </div>
