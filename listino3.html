@@ -318,22 +318,22 @@
                 setNewQuantity(input, currentValue + delta);
             }
             function setNewQuantity(pInputText, pNewQuantity) {
+			    if (pInputText !== nominativoInput) {
                 // Ensure the value is between 0 and 999
-                var newValue = Math.min(999, Math.max(0, pNewQuantity));
-				if (pInputText.value !== newValue) {
-                    pInputText.value = newValue;
-                    qrcodeDiv.innerHTML = "";
-					const id = pInputText.parentNode.id;
-                    const minusButton = document.getElementById(id + '-minus');
-                    if (isNotNullDefined(minusButton)) {
-                        minusButton.disabled = (pNewQuantity <= 0);
-                    }
-                    if (id === '153') {
-                        setRadioSeduti((newValue > 0));
-                    }
-				}
-                
-                // in case of changes the QR must be invalidated
+                    var newValue = Math.min(999, Math.max(0, pNewQuantity));
+                    if (pInputText.value !== newValue) {
+                        pInputText.value = newValue;
+                        qrcodeDiv.innerHTML = "";
+                        const id = pInputText.parentNode.id;
+                        const minusButton = document.getElementById(id + '-minus');
+                        if (isNotNullDefined(minusButton)) {
+                            minusButton.disabled = (pNewQuantity <= 0);
+                        }
+                        if (id === '153') {
+                            setRadioSeduti((newValue > 0));
+                        }
+			     	}
+                }
             }
             document.addEventListener('DOMContentLoaded', () => {
                 let qrcode = null;
