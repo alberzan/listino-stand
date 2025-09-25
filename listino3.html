@@ -78,6 +78,11 @@
                 margin: 0 8px;
                 border-radius: 4px;
             }
+			.quantity-button-img {
+                height: 25px;
+                border: 1px solid #ccc;
+                margin: 0 2px;
+			}
             .input-group-centered {
                 margin-bottom: 20px;
                 text-align: center;
@@ -162,11 +167,11 @@
 <div class="product-price">€ 3,80</div>
 </div>
 <div class="quantity-control" id="3">
-<button id="3-minus10" onclick="changeQuantity('3', -10)">--</button>
-<button id="3-minus" onclick="changeQuantity('3', -1)">-</button>
+<img id="3-minus10" class="quantity-button-img" disabled="true" src="./minus10.bmp" onclick="changeQuantity('3', -10)" />
+<img id="3-minus" class="quantity-button-img" src="./minus.bmp" onclick="changeQuantity('3', -1)" />
 <input class="quantity-input" readonly="" type="text" value="0"/>
-<button id="3-plus" onclick="changeQuantity('3', 1)">+</button>
-<button id="3-plus10" onclick="changeQuantity('3', 10)">++</button>
+<img id="3-plus"  class="quantity-button-img" src="./plus.bmp" onclick="changeQuantity('3', 1)" />
+<img id="3-plus10"  class="quantity-button-img" src="./plus10.bmp" onclick="changeQuantity('3', 10)" />
 </div>
 </div>
 <div class="product-item">
@@ -307,6 +312,7 @@
             function changeQuantity(id, delta) {
                 const quantityControl = document.getElementById(id);
                 const minusButton = document.getElementById(id + '-minus');
+                const minusButton10 = document.getElementById(id + '-minus10');
                 const input = quantityControl.querySelector('.quantity-input');
                 let currentValue = parseInt(input.value);
 
@@ -314,7 +320,9 @@
                 const newValue = currentValue + delta;
                 if (newValue >= 0) {
                     setNewQuantity(input, minusButton, newValue);
-                }
+                } else {
+                    setNewQuantity(input, minusButton, 0);
+				}
                 if (id === '153') {
                     setRadioSeduti((newValue > 0));
                 }
