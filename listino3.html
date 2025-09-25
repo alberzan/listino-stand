@@ -164,12 +164,12 @@
 <h2>CATEGORIA A</h2>
 <div class="product-item">
 <div class="product-info">
-<div class="product-name">VOCE A1 con condimento XYZ</div>
+<div class="product-name">VOCE A1 con condimento XYZK</div>
 <div class="product-price">€ 3,80</div>
 </div>
 <div class="quantity-control" id="3">
 <button disabled="" id="3-minus" onclick="changeQuantity('3', -1)">-</button>
-<input class="quantity-input" type="text" pattern="\d*" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="0"/>
+<input class="quantity-input" type="text" pattern="\d*" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
 <button id="3-plus" onclick="changeQuantity('3', 1)">+</button>
 </div>
 </div>
@@ -180,7 +180,7 @@
 </div>
 <div class="quantity-control" id="4">
 <button id="4-minus" onclick="changeQuantity('4', -1)">-</button>
-<input class="quantity-input" type="text" pattern="\d*" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="0"/>
+<input class="quantity-input" type="text" pattern="\d*" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
 <button id="4-plus" onclick="changeQuantity('4', 1)">+</button>
 </div>
 </div>
@@ -194,7 +194,7 @@
 </div>
 <div class="quantity-control" id="13">
 <button disabled="" id="13-minus" onclick="changeQuantity('13', -1)">-</button>
-<input class="quantity-input" readonly="" type="text" value="0"/>
+<input class="quantity-input" type="text" pattern="\d*" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
 <button id="13-plus" onclick="changeQuantity('13', 1)">+</button>
 </div>
 </div>
@@ -205,7 +205,7 @@
 </div>
 <div class="quantity-control" id="14">
 <button disabled="" id="14-minus" onclick="changeQuantity('14', -1)">-</button>
-<input class="quantity-input" readonly="" type="text" value="0"/>
+<input class="quantity-input" type="text" pattern="\d*" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
 <button id="14-plus" onclick="changeQuantity('14', 1)">+</button>
 </div>
 </div>
@@ -216,7 +216,7 @@
 </div>
 <div class="quantity-control" id="24">
 <button disabled="" id="24-minus" onclick="changeQuantity('24', -1)">-</button>
-<input class="quantity-input" readonly="" type="text" value="0"/>
+<input class="quantity-input" type="text" pattern="\d*" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
 <button id="24-plus" onclick="changeQuantity('24', 1)">+</button>
 </div>
 </div>
@@ -229,7 +229,7 @@
 </div>
 <div class="quantity-control" id="153">
 <button disabled="" id="153-minus" onclick="changeQuantity('153', -1)">-</button>
-<input class="quantity-input" readonly="" type="text" value="0"/>
+<input class="quantity-input" type="text" pattern="\d*" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
 <button id="153-plus" onclick="changeQuantity('153', 1)">+</button>
 </div>
 </div>
@@ -267,6 +267,9 @@
             const copertoMinusButton = document.getElementById('153-minus');
             var copertoQuantityBackup;
 
+            function onlyDigitsKeyPress(pCharCode) {
+                return pCharCode >= 48 && pCharCode <= 57;
+            }
             function isNotNullDefined(pElement) {
                 return (pElement !== null && pElement !== "undefined");
             }
@@ -304,33 +307,33 @@
                         if (pNewQuantity === 0 && copertoInput.value > 0) {
                             copertoQuantityBackup = copertoInput.value;
                         }
-                        setNewQuantity(copertoInput, copertoMinusButton, pNewQuantity);
+                        setNewQuantity(copertoInput, pNewQuantity);
                     }
                 }
             }
             function changeQuantity(id, delta) {
                 const quantityControl = document.getElementById(id);
-                const minusButton = document.getElementById(id + '-minus');
-                const minusButton10 = document.getElementById(id + '-minus10');
                 const input = quantityControl.querySelector('.quantity-input');
                 let currentValue = parseInt(input.value);
 
                 // Ensure the value is not less than zero
-                const newValue = currentValue + delta;
-                if (newValue >= 0) {
-                    setNewQuantity(input, minusButton, newValue);
-                } else {
-                    setNewQuantity(input, minusButton, 0);
+                var newValue = currentValue + delta;
+                if (newValue < 0) {
+                    newValue = 0;
 				}
+                setNewQuantity(input, newValue);
                 if (id === '153') {
                     setRadioSeduti((newValue > 0));
                 }
             }
-            function setNewQuantity(pInputText, pMinusButton, pNewQuantity) {
+            function setNewQuantity(pInputText, pNewQuantity) {
                 pInputText.value = pNewQuantity;
                 // in case of changes the QR must be invalidated
                 qrcodeDiv.innerHTML = "";
-                pMinusButton.disabled = (pNewQuantity <= 0);
+                const minusButton = document.getElementById(pInputText.parentNode.id + '-minus');
+				if (isNotNullDefined(minusButton)) {
+                    minusButton.disabled = (pNewQuantity <= 0);
+				}
             }
             document.addEventListener('DOMContentLoaded', () => {
                 let qrcode = null;
@@ -497,6 +500,9 @@ document.querySelectorAll('.inc, .dec').forEach(button => {
 <script>
     $(function(){
         $(document).on('click','input[type=text]',function(){ this.select(); });
+    });
+    $(function(){
+        $(document).on('blur','input[type=text]',function(){ setNewQuantity(this, this.value); });
     });
 </script>
 
