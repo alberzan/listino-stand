@@ -6,6 +6,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>STAND</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <style>
             body {
                 font-family: sans-serif;
@@ -167,11 +168,9 @@
 <div class="product-price">€ 3,80</div>
 </div>
 <div class="quantity-control" id="3">
-<img id="3-minus10" class="quantity-button-img" disabled="true" src="./minus10.bmp" onclick="changeQuantity('3', -10)" />
-<img id="3-minus" class="quantity-button-img" src="./minus.bmp" onclick="changeQuantity('3', -1)" />
-<input class="quantity-input" readonly="" type="text" value="0"/>
-<img id="3-plus"  class="quantity-button-img" src="./plus.bmp" onclick="changeQuantity('3', 1)" />
-<img id="3-plus10"  class="quantity-button-img" src="./plus10.bmp" onclick="changeQuantity('3', 10)" />
+<button disabled="" id="3-minus" onclick="changeQuantity('3', -1)">-</button>
+<input class="quantity-input" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="0"/>
+<button id="3-plus" onclick="changeQuantity('3', 1)">+</button>
 </div>
 </div>
 <div class="product-item">
@@ -494,5 +493,13 @@ document.querySelectorAll('.inc, .dec').forEach(button => {
         clearTimeout(pressTimer);
     });
 });
-</script></body>
+</script>
+<script>
+    $(function(){
+        $(document).on('click','input[type=text]',function(){ this.select(); });
+    });
+</script>
+
+
+</body>
 </html>
