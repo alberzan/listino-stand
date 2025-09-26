@@ -84,6 +84,8 @@
                 border: 1px solid #ccc;
                 margin: 0 2px;
 			}
+            .unit-price {
+            }
             .input-group-centered {
                 margin-bottom: 20px;
                 text-align: center;
@@ -161,100 +163,111 @@
 <body>
 <h1>Listino prezzi</h1>
 <div class="product-list">
-<h2>CATEGORIA A</h2>
-<div class="product-item">
-<div class="product-info">
-<div class="product-name">VOCE A1 con condimento XYZK</div>
-<div class="product-price">€ 3,80</div>
-</div>
-<div class="quantity-control" id="3">
-<button disabled="" id="3-minus" onclick="applyDeltaQuantity('3', -1)">-</button>
-<input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
-<button id="3-plus" onclick="applyDeltaQuantity('3', 1)">+</button>
-</div>
-</div>
-<div class="product-item">
-<div class="product-info">
-<div class="product-name">VOCE A2</div>
-<div class="product-price">€ 1,50</div>
-</div>
-<div class="quantity-control" id="4">
-<button disabled="" id="4-minus" onclick="applyDeltaQuantity('4', -1)">-</button>
-<input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
-<button id="4-plus" onclick="applyDeltaQuantity('4', 1)">+</button>
-</div>
-</div>
-</div>
-<div class="product-list">
-<h2>CATEGORIA B</h2>
-<div class="product-item">
-<div class="product-info">
-<div class="product-name">VOCE B1</div>
-<div class="product-price">€ 1,80</div>
-</div>
-<div class="quantity-control" id="13">
-<button disabled="" id="13-minus" onclick="applyDeltaQuantity('13', -1)">-</button>
-<input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
-<button id="13-plus" onclick="applyDeltaQuantity('13', 1)">+</button>
-</div>
-</div>
-<div class="product-item">
-<div class="product-info">
-<div class="product-name">VOCE B2</div>
-<div class="product-price">€ 1,40</div>
-</div>
-<div class="quantity-control" id="14">
-<button disabled="" id="14-minus" onclick="applyDeltaQuantity('14', -1)">-</button>
-<input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
-<button id="14-plus" onclick="applyDeltaQuantity('14', 1)">+</button>
-</div>
-</div>
-<div class="product-item">
-<div class="product-info">
-<div class="product-name">VOCE B3</div>
-<div class="product-price">€ 1,83</div>
-</div>
-<div class="quantity-control" id="24">
-<button disabled="" id="24-minus" onclick="applyDeltaQuantity('24', -1)">-</button>
-<input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
-<button id="24-plus" onclick="applyDeltaQuantity('24', 1)">+</button>
-</div>
-</div>
+	<h2>CATEGORIA A</h2>
+	<div class="product-item">
+		<div class="product-info">
+			<div class="product-name">VOCE A1 con condimento XYZK</div>
+			<div class="product-price">€ 3,80</div>
+		</div>
+		<div class="quantity-control" id="3">
+			<button disabled="" id="3-minus" onclick="applyDeltaQuantity('3', -1)">-</button>
+			<input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+			<input class="unit-price-cents"type="hidden" value="380" />
+			<button id="3-plus" onclick="applyDeltaQuantity('3', 1)">+</button>
+		</div>
+	</div>
+	<div class="product-item">
+		<div class="product-info">
+			<div class="product-name">VOCE A2</div>
+			<div class="product-price">€ 1,50</div>
+		</div>
+		<div class="quantity-control" id="4">
+			<button disabled="" id="4-minus" onclick="applyDeltaQuantity('4', -1)">-</button>
+			<input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+			<input class="unit-price-cents"type="hidden" value="150" />
+			<button id="4-plus" onclick="applyDeltaQuantity('4', 1)">+</button>
+		</div>
+	</div>
 </div>
 <div class="product-list">
-<div class="product-item">
-<div class="product-info">
-<div class="product-name">Coperto</div>
-<div class="product-price">€ 1,00</div>
+	<h2>CATEGORIA B</h2>
+	<div class="product-item">
+		<div class="product-info">
+			<div class="product-name">VOCE B1</div>
+			<div class="product-price">€ 1,80</div>
+		</div>
+		<div class="quantity-control" id="13">
+			<button disabled="" id="13-minus" onclick="applyDeltaQuantity('13', -1)">-</button>
+			<input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+			<input class="unit-price-cents"type="hidden" value="180" />
+			<button id="13-plus" onclick="applyDeltaQuantity('13', 1)">+</button>
+		</div>
+	</div>
+	<div class="product-item">
+		<div class="product-info">
+			<div class="product-name">VOCE B2</div>
+			<div class="product-price">€ 1,40</div>
+		</div>
+		<div class="quantity-control" id="14">
+			<button disabled="" id="14-minus" onclick="applyDeltaQuantity('14', -1)">-</button>
+			<input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+			<input class="unit-price-cents"type="hidden" value="140" />
+			<button id="14-plus" onclick="applyDeltaQuantity('14', 1)">+</button>
+		</div>
+	</div>
+	<div class="product-item">
+		<div class="product-info">
+			<div class="product-name">VOCE B3</div>
+			<div class="product-price">€ 1,83</div>
+		</div>
+		<div class="quantity-control" id="24">
+			<button disabled="" id="24-minus" onclick="applyDeltaQuantity('24', -1)">-</button>
+			<input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+			<input class="unit-price-cents"type="hidden" value="183" />
+			<button id="24-plus" onclick="applyDeltaQuantity('24', 1)">+</button>
+		</div>
+	</div>
 </div>
-<div class="quantity-control" id="153">
-<button disabled="" id="153-minus" onclick="applyDeltaQuantity('153', -1)">-</button>
-<input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
-<button id="153-plus" onclick="applyDeltaQuantity('153', 1)">+</button>
-</div>
-</div>
+<div class="product-list">
+	<div class="product-item">
+		<div class="product-info">
+			<div class="product-name">Coperto</div>
+			<div class="product-price">€ 1,00</div>
+		</div>
+		<div class="quantity-control" id="153">
+			<button disabled="" id="153-minus" onclick="applyDeltaQuantity('153', -1)">-</button>
+			<input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+			<input class="unit-price-cents"type="hidden" value="100" />
+			<button id="153-plus" onclick="applyDeltaQuantity('153', 1)">+</button>
+		</div>
+	</div>
 </div>
 <div class="container">
-<div class="input-group-left">
-<input id="SED" name="tavolo_asporto" type="radio" value="SED"/>
-<label for="SED">Ci sediamo al tavolo</label><br/>
-<input id="ASP" name="tavolo_asporto" type="radio" value="ASP"/>
-<label for="ASP">Asporto</label><br/>
-<input id="INT" name="tavolo_asporto" type="radio" value="INT"/>
-<label for="INT">Siamo già seduti (integrazione)</label>
-</div>
-<div class="input-group-centered">
-<input id="nominativoInput" placeholder="Nominativo per la chiamata" type="text" value=""/>
-</div>
-<div class="input-group-centered">
-<button id="generateQrBtn">Genera QR Code da mostrare alla cassa</button>
-</div>
+	<div class="input-group-left">
+		<input id="SED" name="tavolo_asporto" type="radio" value="SED"/>
+		<label for="SED">Ci sediamo al tavolo</label>
+		<br/>
+		<input id="ASP" name="tavolo_asporto" type="radio" value="ASP"/>
+		<label for="ASP">Asporto</label>
+		<br/>
+		<input id="INT" name="tavolo_asporto" type="radio" value="INT"/>
+		<label for="INT">Siamo già seduti (integrazione)</label>
+	</div>
+	<div class="input-group-centered">
+		<input id="nominativoInput" placeholder="Nominativo per la chiamata" type="text" value=""/>
+	</div>
+	<div class="input-group-centered">
+		<button id="generateQrBtn">Genera QR Code da mostrare alla cassa</button>
+	</div>
+	<div class="input-group-centered">
+        <div id="totalAmount" class="product-name">TESTO</div>
+	</div>
 </div>
 <div class="qrcontainer">
-<div class="img-wrapper-base">
-<img alt="Immagine base" src="white256.jpg"/>
-</div>
-<div class="img-wrapper-overlay" id="qrcode">
+	<div class="img-wrapper-base">
+		<img alt="Immagine base" src="white256.jpg"/>
+	</div>
+	<div class="img-wrapper-overlay" id="qrcode">
 </div>
 </div>
 <script>
@@ -265,6 +278,7 @@
             const sedutiRadioEl = document.getElementById('SED');
             const copertoQuantityControl = document.getElementById('153');
             const copertoMinusButton = document.getElementById('153-minus');
+            const totalAmountEl = document.getElementById('totalAmount');
             var copertoQuantityBackup;
 
             function onlyDigitsKeyPress(pCharCode) {
@@ -320,7 +334,7 @@
             function adjustQuantityValue(pInputText) {
                 try {
                     var valueInt = isNaN(pInputText.value)? 0 : Number(pInputText.value);
-                    console.log('pInputText.value = ' + pInputText.value + ' -- valueInt = ' + valueInt);
+                    //console.log('pInputText.value = ' + pInputText.value + ' -- valueInt = ' + valueInt);
                     setNewQuantity(pInputText, valueInt);
                 } catch (error) {
                     console.error("An error occurred in setNewQuantityFromTxt: ", error.message);
@@ -331,10 +345,11 @@
                 if (pInputText !== nominativoInput) {
                 // Ensure the value is between 0 and 999
                     var newValue = Math.min(999, Math.max(0, pNewQuantity));
-                    console.log(pNewQuantity + ' -- ' + newValue);
+                    //console.log(pNewQuantity + ' -- ' + newValue);
                     if (pInputText !== 'NaN' && pInputText.value !== newValue) {
                         pInputText.value = newValue;
                         qrcodeDiv.innerHTML = "";
+						totalAmountEl.innerHTML = "";
                         const id = pInputText.parentNode.id;
                         const minusButton = document.getElementById(id + '-minus');
                         if (isNotNullDefined(minusButton)) {
@@ -359,14 +374,22 @@
                 function generateQRCode() {
                     qrcodeDiv.innerHTML = "";
                     var filteredArray = document.getElementsByClassName("quantity-control");
+					var totalAmountCents = 0;
                     const quantytyMap = new Map();
                     for (const el of filteredArray) {
-                        let currentValue = parseInt(el.querySelector('.quantity-input').value);
+					    const unitPriceEl = el.querySelector('.unit-price-cents');
+                        let unitPriceCents = (isNotNullDefined(unitPriceEl))? Number(unitPriceEl.value) : 0;
+                        let currentValue = Number(el.querySelector('.quantity-input').value);
+                        console.log("unitPriceCents = " + unitPriceCents + " - currentValue = " + currentValue);
                         if (currentValue > 0) {
                             var currVal = quantytyMap.get(currentValue) || '';
                             quantytyMap.set(currentValue, currVal + '-' + el.id);
+							totalAmountCents += unitPriceCents * currentValue;
                         }
                     }
+					const totalAmountEur = totalAmountCents / 100;
+                    console.log("totalAmountEur = " + totalAmountEur + " -- " + totalAmountEur.toLocaleString("it-IT", {style:"currency", currency:"EUR"}));
+					totalAmountEl.innerHTML = "TOTALE: " + totalAmountEur.toLocaleString("it-IT", {style:"currency", currency:"EUR"});
                     var ordineStreamPart = '';
                     quantytyMap.forEach(function (value, key) {
                         ordineStreamPart += ' ' + key + value;
@@ -482,8 +505,6 @@
                     return t;
                 }};
 
-        </script>
-<script>
 document.querySelectorAll('.inc, .dec').forEach(button => {
     let pressTimer;
     let longPress = false;
@@ -511,8 +532,6 @@ document.querySelectorAll('.inc, .dec').forEach(button => {
         clearTimeout(pressTimer);
     });
 });
-</script>
-<script>
     $(function(){
         $(document).on('click','input[type=text]',function(){ this.select(); });
     });
