@@ -180,7 +180,7 @@
 </div>
 <div class="quantity-control" id="4">
 <button disabled="" id="4-minus" onclick="applyDeltaQuantity('4', -1)">-</button>
-<input class="quantity-input" type="text" pattern="\d*" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+<input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
 <button id="4-plus" onclick="applyDeltaQuantity('4', 1)">+</button>
 </div>
 </div>
@@ -194,7 +194,7 @@
 </div>
 <div class="quantity-control" id="13">
 <button disabled="" id="13-minus" onclick="applyDeltaQuantity('13', -1)">-</button>
-<input class="quantity-input" type="text" pattern="\d*" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+<input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
 <button id="13-plus" onclick="applyDeltaQuantity('13', 1)">+</button>
 </div>
 </div>
@@ -205,7 +205,7 @@
 </div>
 <div class="quantity-control" id="14">
 <button disabled="" id="14-minus" onclick="applyDeltaQuantity('14', -1)">-</button>
-<input class="quantity-input" type="text" pattern="\d*" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+<input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
 <button id="14-plus" onclick="applyDeltaQuantity('14', 1)">+</button>
 </div>
 </div>
@@ -216,7 +216,7 @@
 </div>
 <div class="quantity-control" id="24">
 <button disabled="" id="24-minus" onclick="applyDeltaQuantity('24', -1)">-</button>
-<input class="quantity-input" type="text" pattern="\d*" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+<input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
 <button id="24-plus" onclick="applyDeltaQuantity('24', 1)">+</button>
 </div>
 </div>
@@ -229,7 +229,7 @@
 </div>
 <div class="quantity-control" id="153">
 <button disabled="" id="153-minus" onclick="applyDeltaQuantity('153', -1)">-</button>
-<input class="quantity-input" type="text" pattern="\d*" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+<input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
 <button id="153-plus" onclick="applyDeltaQuantity('153', 1)">+</button>
 </div>
 </div>
@@ -323,12 +323,12 @@
                     console.log('pInputText.value = ' + pInputText.value + ' -- valueInt = ' + valueInt);
                     setNewQuantity(pInputText, valueInt);
                 } catch (error) {
-			     	console.error("An error occurred in setNewQuantityFromTxt: ", error.message);
+                    console.error("An error occurred in setNewQuantityFromTxt: ", error.message);
                 }
-			}
-			
+            }
+
             function setNewQuantity(pInputText, pNewQuantity) {
-			    if (pInputText !== nominativoInput) {
+                if (pInputText !== nominativoInput) {
                 // Ensure the value is between 0 and 999
                     var newValue = Math.min(999, Math.max(0, pNewQuantity));
                     console.log(pNewQuantity + ' -- ' + newValue);
@@ -340,10 +340,14 @@
                         if (isNotNullDefined(minusButton)) {
                             minusButton.disabled = (pNewQuantity <= 0);
                         }
+                        const plusButton = document.getElementById(id + '-plus');
+                        if (isNotNullDefined(plusButton)) {
+                            plusButton.disabled = (pNewQuantity >= 999);
+                        }
                         if (id === '153') {
                             setRadioSeduti((newValue > 0));
                         }
-			     	}
+                    }
                 }
             }
             document.addEventListener('DOMContentLoaded', () => {
