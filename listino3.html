@@ -169,7 +169,7 @@
 </div>
 <div class="quantity-control" id="3">
 <button disabled="" id="3-minus" onclick="applyDeltaQuantity('3', -1)">-</button>
-<input class="quantity-input" type="text" pattern="\d*" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+<input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
 <button id="3-plus" onclick="applyDeltaQuantity('3', 1)">+</button>
 </div>
 </div>
