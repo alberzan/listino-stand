@@ -123,6 +123,10 @@
                 height: 100%;
                 object-fit: cover;
             }
+            .disclaimer {
+                margin-top: 5px;
+                font-size: 10px;
+            }
             h1 {
                 color: #333;
                 text-align: center;
@@ -627,7 +631,7 @@
                 <div id="151" class="quantity-control">
                     <button id="151-minus" disabled onclick="applyDeltaQuantity('151', -1)">-</button>
                     <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
-                    <input class="unit-price-cents"type="hidden" value="1000" />
+                    <input class="unit-price-cents"type="hidden" value="1.000" />
                     <button id="151-plus" onclick="applyDeltaQuantity('151', 1)">+</button>
                 </div>
             </div>
@@ -639,7 +643,7 @@
                 <div id="152" class="quantity-control">
                     <button id="152-minus" disabled onclick="applyDeltaQuantity('152', -1)">-</button>
                     <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
-                    <input class="unit-price-cents"type="hidden" value="1000" />
+                    <input class="unit-price-cents"type="hidden" value="1.000" />
                     <button id="152-plus" onclick="applyDeltaQuantity('152', 1)">+</button>
                 </div>
             </div>
@@ -777,7 +781,7 @@
                 <div id="153" class="quantity-control">
                     <button id="153-minus" disabled onclick="applyDeltaQuantity('153', -1)">-</button>
                     <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
-                    <input class="unit-price-cents"type="hidden" value="100" />
+                    <input class="unit-price-cents" type="hidden" value="100" />
                     <button id="153-plus" onclick="applyDeltaQuantity('153', 1)">+</button>
                 </div>
             </div>
@@ -793,16 +797,18 @@
                 <label for="INT">Siamo già seduti (integrazione)</label>
              </div>
             <div class="input-group-centered">
-                <input type="text" id="nominativoInput" placeholder="Nominativo per la chiamata" value="">
+                <input type="text" id="nominativoInput" placeholder="Nominativo per la chiamata (1)" value="">
+                <div class="disclaimer">(1) Questa informazione non verrà registrata a sistema</div>
             </div>
             <div class="input-group-centered">
                 <button id="generateQrBtn">Genera QR Code da mostrare alla cassa</button>
             </div>
-            <div class="input-group-centered">
-                <div id="totalAmount" class="product-name"></div>
+            <div id="amountDiv" class="input-group-centered">
+                <div id="totalAmount" class="product-name">-</div>
+                <div class="disclaimer">(2) Il prezzo qui calcolato è da intendersi puramente indicativo. <br />Fa fede l'importo comunicato dalla cassa all'atto dell'acquisizione ordine.</div>
             </div>
         </div>
-        <div class="qrcontainer">
+        <div id="qrcontainer" class="qrcontainer">
             <div class="img-wrapper-base">
                 <img src="white256.jpg" alt="Immagine base">
             </div>
@@ -813,13 +819,18 @@
         <script>
             const nominativoInput = document.getElementById('nominativoInput');
             const generateQrBtn = document.getElementById('generateQrBtn');
+            const qrcontainerEl = document.getElementById('qrcontainer');
             const qrcodeDiv = document.getElementById('qrcode');
             const tavoloAsportoRadioArray = document.getElementsByName('tavolo_asporto');
             const sedutiRadioEl = document.getElementById('SED');
             const copertoQuantityControl = document.getElementById('153');
             const copertoMinusButton = document.getElementById('153-minus');
             const totalAmountEl = document.getElementById('totalAmount');
+            const amountDivEl = document.getElementById('amountDiv');
             var copertoQuantityBackup;
+
+            qrcontainerEl.style.display = 'none';
+            amountDivEl.style.display = 'none';
 
             function onlyDigitsKeyPress(pCharCode) {
                 return pCharCode >= 48 && pCharCode <= 57;
@@ -888,8 +899,10 @@
                     //console.log(pNewQuantity + ' -- ' + newValue);
                     if (pInputText !== 'NaN' && pInputText.value !== newValue) {
                         pInputText.value = newValue;
+                        qrcontainerEl.style.display = 'none';
+                        amountDivEl.style.display = 'none';
                         qrcodeDiv.innerHTML = "";
-						totalAmountEl.innerHTML = "";
+                        totalAmountEl.innerHTML = "";
                         const id = pInputText.parentNode.id;
                         const minusButton = document.getElementById(id + '-minus');
                         if (isNotNullDefined(minusButton)) {
@@ -914,23 +927,24 @@
                 function generateQRCode() {
                     qrcodeDiv.innerHTML = "";
                     var filteredArray = document.getElementsByClassName("quantity-control");
-					var totalAmountCents = 0;
+                    var totalAmountCents = 0;
                     const quantytyMap = new Map();
                     for (const el of filteredArray) {
-					    const unitPriceEl = el.querySelector('.unit-price-cents');
+                        const unitPriceEl = el.querySelector('.unit-price-cents');
                         let unitPriceCents = (isNotNullDefined(unitPriceEl))? Number(unitPriceEl.value) : 0;
                         let currentValue = Number(el.querySelector('.quantity-input').value);
                         if (currentValue > 0) {
-						    let itemAmount = unitPriceCents * currentValue;
+                            let itemAmount = unitPriceCents * currentValue;
                             console.log("unitPriceCents = " + unitPriceCents + " - currentValue = " + currentValue + " --- itemAmount = " + itemAmount);
                             var currQuantityStreamVal = quantytyMap.get(currentValue) || '';
                             quantytyMap.set(currentValue, currQuantityStreamVal + '-' + el.id);
-							totalAmountCents += itemAmount;
+                            totalAmountCents += itemAmount;
                         }
                     }
 					const totalAmountEur = totalAmountCents / 100;
                     console.log("totalAmountEur = " + totalAmountEur + " -- " + totalAmountEur.toLocaleString("it-IT", {style:"currency", currency:"EUR"}));
-					totalAmountEl.innerHTML = "TOTALE: " + totalAmountEur.toLocaleString("it-IT", {style:"currency", currency:"EUR"});
+                    amountDivEl.style.display = 'block';
+                    totalAmountEl.innerHTML = "TOTALE: " + totalAmountEur.toLocaleString("it-IT", {style:"currency", currency:"EUR"}) + " (2)";
                     var ordineStreamPart = '';
                     quantytyMap.forEach(function (value, key) {
                         ordineStreamPart += ' ' + key + value;
@@ -948,6 +962,7 @@
                             colorLight: "#ffffff",
                             correctLevel: QRCode.CorrectLevel.H
                         });
+                        qrcontainerEl.style.display = 'block';
                     }
                 }
 
