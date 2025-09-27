@@ -627,7 +627,7 @@
                 <div id="151" class="quantity-control">
                     <button id="151-minus" disabled onclick="applyDeltaQuantity('151', -1)">-</button>
                     <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
-                    <input class="unit-price-cents"type="hidden" value="1.000" />
+                    <input class="unit-price-cents"type="hidden" value="1000" />
                     <button id="151-plus" onclick="applyDeltaQuantity('151', 1)">+</button>
                 </div>
             </div>
@@ -639,7 +639,7 @@
                 <div id="152" class="quantity-control">
                     <button id="152-minus" disabled onclick="applyDeltaQuantity('152', -1)">-</button>
                     <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
-                    <input class="unit-price-cents"type="hidden" value="1.000" />
+                    <input class="unit-price-cents"type="hidden" value="1000" />
                     <button id="152-plus" onclick="applyDeltaQuantity('152', 1)">+</button>
                 </div>
             </div>
@@ -920,11 +920,12 @@
 					    const unitPriceEl = el.querySelector('.unit-price-cents');
                         let unitPriceCents = (isNotNullDefined(unitPriceEl))? Number(unitPriceEl.value) : 0;
                         let currentValue = Number(el.querySelector('.quantity-input').value);
-                        console.log("unitPriceCents = " + unitPriceCents + " - currentValue = " + currentValue);
                         if (currentValue > 0) {
-                            var currVal = quantytyMap.get(currentValue) || '';
-                            quantytyMap.set(currentValue, currVal + '-' + el.id);
-							totalAmountCents += unitPriceCents * currentValue;
+						    let itemAmount = unitPriceCents * currentValue;
+                            console.log("unitPriceCents = " + unitPriceCents + " - currentValue = " + currentValue + " --- itemAmount = " + itemAmount);
+                            var currQuantityStreamVal = quantytyMap.get(currentValue) || '';
+                            quantytyMap.set(currentValue, currQuantityStreamVal + '-' + el.id);
+							totalAmountCents += itemAmount;
                         }
                     }
 					const totalAmountEur = totalAmountCents / 100;
