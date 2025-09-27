@@ -125,7 +125,7 @@
             }
             .disclaimer {
                 margin-top: 5px;
-                font-size: 10px;
+                font-size: 11px;
             }
             h1 {
                 color: #333;
@@ -631,7 +631,7 @@
                 <div id="151" class="quantity-control">
                     <button id="151-minus" disabled onclick="applyDeltaQuantity('151', -1)">-</button>
                     <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
-                    <input class="unit-price-cents"type="hidden" value="1.000" />
+                    <input class="unit-price-cents"type="hidden" value="1000" />
                     <button id="151-plus" onclick="applyDeltaQuantity('151', 1)">+</button>
                 </div>
             </div>
@@ -643,7 +643,7 @@
                 <div id="152" class="quantity-control">
                     <button id="152-minus" disabled onclick="applyDeltaQuantity('152', -1)">-</button>
                     <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
-                    <input class="unit-price-cents"type="hidden" value="1.000" />
+                    <input class="unit-price-cents"type="hidden" value="1000" />
                     <button id="152-plus" onclick="applyDeltaQuantity('152', 1)">+</button>
                 </div>
             </div>
@@ -798,14 +798,14 @@
              </div>
             <div class="input-group-centered">
                 <input type="text" id="nominativoInput" placeholder="Nominativo per la chiamata (1)" value="">
-                <div class="disclaimer">(1) Questa informazione non verrà registrata a sistema</div>
+                <div class="disclaimer">(1) Il nominativo non verrà registrato a sistema.</div>
             </div>
             <div class="input-group-centered">
                 <button id="generateQrBtn">Genera QR Code da mostrare alla cassa</button>
             </div>
             <div id="amountDiv" class="input-group-centered">
                 <div id="totalAmount" class="product-name">-</div>
-                <div class="disclaimer">(2) Il prezzo qui calcolato è da intendersi puramente indicativo. <br />Fa fede l'importo comunicato dalla cassa all'atto dell'acquisizione ordine.</div>
+                <div class="disclaimer">(2) Il totale mostrato è da intendersi puramente indicativo. Fa fede l'importo comunicato dalla cassa all'atto dell'acquisizione ordine.</div>
             </div>
         </div>
         <div id="qrcontainer" class="qrcontainer">
