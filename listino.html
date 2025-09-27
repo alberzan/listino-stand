@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Parrocchia di Castelvetro</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <style>
             body {
                 font-family: sans-serif;
@@ -76,6 +77,8 @@
                 border: 1px solid #ccc;
                 margin: 0 8px;
                 border-radius: 4px;
+            }
+            .unit-price-cents {
             }
             .input-group-centered {
                 margin-bottom: 20px;
@@ -163,9 +166,10 @@
                     <div class="product-price">€ 0,80</div>
                 </div>
                 <div id="3" class="quantity-control">
-                    <button id="3-minus" disabled onclick="changeQuantity('3', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="3-plus" onclick="changeQuantity('3', 1)">+</button>
+                    <button id="3-minus" disabled onclick="applyDeltaQuantity('3', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="80" />
+                    <button id="3-plus" onclick="applyDeltaQuantity('3', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -174,9 +178,10 @@
                     <div class="product-price">€ 1,80</div>
                 </div>
                 <div id="4" class="quantity-control">
-                    <button id="4-minus" disabled onclick="changeQuantity('4', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="4-plus" onclick="changeQuantity('4', 1)">+</button>
+                    <button id="4-minus" disabled onclick="applyDeltaQuantity('4', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="180" />
+                    <button id="4-plus" onclick="applyDeltaQuantity('4', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -185,9 +190,10 @@
                     <div class="product-price">€ 2,20</div>
                 </div>
                 <div id="54" class="quantity-control">
-                    <button id="54-minus" disabled onclick="changeQuantity('54', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="54-plus" onclick="changeQuantity('54', 1)">+</button>
+                    <button id="54-minus" disabled onclick="applyDeltaQuantity('54', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="220" />
+                    <button id="54-plus" onclick="applyDeltaQuantity('54', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -196,9 +202,10 @@
                     <div class="product-price">€ 2,00</div>
                 </div>
                 <div id="62" class="quantity-control">
-                    <button id="62-minus" disabled onclick="changeQuantity('62', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="62-plus" onclick="changeQuantity('62', 1)">+</button>
+                    <button id="62-minus" disabled onclick="applyDeltaQuantity('62', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="200" />
+                    <button id="62-plus" onclick="applyDeltaQuantity('62', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -207,9 +214,10 @@
                     <div class="product-price">€ 2,00</div>
                 </div>
                 <div id="51" class="quantity-control">
-                    <button id="51-minus" disabled onclick="changeQuantity('51', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="51-plus" onclick="changeQuantity('51', 1)">+</button>
+                    <button id="51-minus" disabled onclick="applyDeltaQuantity('51', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="200" />
+                    <button id="51-plus" onclick="applyDeltaQuantity('51', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -218,9 +226,10 @@
                     <div class="product-price">€ 2,00</div>
                 </div>
                 <div id="49" class="quantity-control">
-                    <button id="49-minus" disabled onclick="changeQuantity('49', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="49-plus" onclick="changeQuantity('49', 1)">+</button>
+                    <button id="49-minus" disabled onclick="applyDeltaQuantity('49', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="200" />
+                    <button id="49-plus" onclick="applyDeltaQuantity('49', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -229,9 +238,10 @@
                     <div class="product-price">€ 2,00</div>
                 </div>
                 <div id="50" class="quantity-control">
-                    <button id="50-minus" disabled onclick="changeQuantity('50', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="50-plus" onclick="changeQuantity('50', 1)">+</button>
+                    <button id="50-minus" disabled onclick="applyDeltaQuantity('50', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="200" />
+                    <button id="50-plus" onclick="applyDeltaQuantity('50', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -240,9 +250,109 @@
                     <div class="product-price">€ 2,00</div>
                 </div>
                 <div id="110" class="quantity-control">
-                    <button id="110-minus" disabled onclick="changeQuantity('110', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="110-plus" onclick="changeQuantity('110', 1)">+</button>
+                    <button id="110-minus" disabled onclick="applyDeltaQuantity('110', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="200" />
+                    <button id="110-plus" onclick="applyDeltaQuantity('110', 1)">+</button>
+                </div>
+            </div>
+        </div>
+        <div class="product-list">
+            <h2>Gnocco fritto</h2>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Gnocco fritto singolo vuoto</div>
+                    <div class="product-price">€ 1,00</div>
+                </div>
+                <div id="5" class="quantity-control">
+                    <button id="5-minus" disabled onclick="applyDeltaQuantity('5', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="100" />
+                    <button id="5-plus" onclick="applyDeltaQuantity('5', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Gnocco fritto doppio con Crudo</div>
+                    <div class="product-price">€ 3,50</div>
+                </div>
+                <div id="58" class="quantity-control">
+                    <button id="58-minus" disabled onclick="applyDeltaQuantity('58', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="350" />
+                    <button id="58-plus" onclick="applyDeltaQuantity('58', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Gnocco fritto doppio con Cotto</div>
+                    <div class="product-price">€ 3,00</div>
+                </div>
+                <div id="65" class="quantity-control">
+                    <button id="65-minus" disabled onclick="applyDeltaQuantity('65', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="300" />
+                    <button id="65-plus" onclick="applyDeltaQuantity('65', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Gnocco fritto doppio con Salame</div>
+                    <div class="product-price">€ 3,00</div>
+                </div>
+                <div id="56" class="quantity-control">
+                    <button id="56-minus" disabled onclick="applyDeltaQuantity('56', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="300" />
+                    <button id="56-plus" onclick="applyDeltaQuantity('56', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Gnocco fritto doppio con Ciccioli</div>
+                    <div class="product-price">€ 3,00</div>
+                </div>
+                <div id="6" class="quantity-control">
+                    <button id="6-minus" disabled onclick="applyDeltaQuantity('6', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="300" />
+                    <button id="6-plus" onclick="applyDeltaQuantity('6', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Gnocco fritto doppio con Pancetta</div>
+                    <div class="product-price">€ 3,00</div>
+                </div>
+                <div id="55" class="quantity-control">
+                    <button id="55-minus" disabled onclick="applyDeltaQuantity('55', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="300" />
+                    <button id="55-plus" onclick="applyDeltaQuantity('55', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Gnocco fritto doppio con Mortadella</div>
+                    <div class="product-price">€ 3,00</div>
+                </div>
+                <div id="111" class="quantity-control">
+                    <button id="111-minus" disabled onclick="applyDeltaQuantity('111', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="300" />
+                    <button id="111-plus" onclick="applyDeltaQuantity('111', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Gnocco da passeggio</div>
+                    <div class="product-price">€ 2,00</div>
+                </div>
+                <div id="150" class="quantity-control">
+                    <button id="150-minus" disabled onclick="applyDeltaQuantity('150', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="200" />
+                    <button id="150-plus" onclick="applyDeltaQuantity('150', 1)">+</button>
                 </div>
             </div>
         </div>
@@ -254,9 +364,10 @@
                     <div class="product-price">€ 2,50</div>
                 </div>
                 <div id="66" class="quantity-control">
-                    <button id="66-minus" disabled onclick="changeQuantity('66', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="66-plus" onclick="changeQuantity('66', 1)">+</button>
+                    <button id="66-minus" disabled onclick="applyDeltaQuantity('66', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="250" />
+                    <button id="66-plus" onclick="applyDeltaQuantity('66', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -265,9 +376,10 @@
                     <div class="product-price">€ 5,00</div>
                 </div>
                 <div id="70" class="quantity-control">
-                    <button id="70-minus" disabled onclick="changeQuantity('70', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="70-plus" onclick="changeQuantity('70', 1)">+</button>
+                    <button id="70-minus" disabled onclick="applyDeltaQuantity('70', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="500" />
+                    <button id="70-plus" onclick="applyDeltaQuantity('70', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -276,9 +388,10 @@
                     <div class="product-price">€ 4,00</div>
                 </div>
                 <div id="71" class="quantity-control">
-                    <button id="71-minus" disabled onclick="changeQuantity('71', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="71-plus" onclick="changeQuantity('71', 1)">+</button>
+                    <button id="71-minus" disabled onclick="applyDeltaQuantity('71', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="400" />
+                    <button id="71-plus" onclick="applyDeltaQuantity('71', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -287,9 +400,10 @@
                     <div class="product-price">€ 4,00</div>
                 </div>
                 <div id="68" class="quantity-control">
-                    <button id="68-minus" disabled onclick="changeQuantity('68', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="68-plus" onclick="changeQuantity('68', 1)">+</button>
+                    <button id="68-minus" disabled onclick="applyDeltaQuantity('68', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="400" />
+                    <button id="68-plus" onclick="applyDeltaQuantity('68', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -298,9 +412,10 @@
                     <div class="product-price">€ 4,00</div>
                 </div>
                 <div id="67" class="quantity-control">
-                    <button id="67-minus" disabled onclick="changeQuantity('67', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="67-plus" onclick="changeQuantity('67', 1)">+</button>
+                    <button id="67-minus" disabled onclick="applyDeltaQuantity('67', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="400" />
+                    <button id="67-plus" onclick="applyDeltaQuantity('67', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -309,9 +424,10 @@
                     <div class="product-price">€ 4,00</div>
                 </div>
                 <div id="72" class="quantity-control">
-                    <button id="72-minus" disabled onclick="changeQuantity('72', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="72-plus" onclick="changeQuantity('72', 1)">+</button>
+                    <button id="72-minus" disabled onclick="applyDeltaQuantity('72', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="400" />
+                    <button id="72-plus" onclick="applyDeltaQuantity('72', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -320,9 +436,10 @@
                     <div class="product-price">€ 4,00</div>
                 </div>
                 <div id="112" class="quantity-control">
-                    <button id="112-minus" disabled onclick="changeQuantity('112', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="112-plus" onclick="changeQuantity('112', 1)">+</button>
+                    <button id="112-minus" disabled onclick="applyDeltaQuantity('112', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="400" />
+                    <button id="112-plus" onclick="applyDeltaQuantity('112', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -331,9 +448,10 @@
                     <div class="product-price">€ 4,00</div>
                 </div>
                 <div id="149" class="quantity-control">
-                    <button id="149-minus" disabled onclick="changeQuantity('149', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="149-plus" onclick="changeQuantity('149', 1)">+</button>
+                    <button id="149-minus" disabled onclick="applyDeltaQuantity('149', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="400" />
+                    <button id="149-plus" onclick="applyDeltaQuantity('149', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -342,9 +460,10 @@
                     <div class="product-price">€ 2,50</div>
                 </div>
                 <div id="69" class="quantity-control">
-                    <button id="69-minus" disabled onclick="changeQuantity('69', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="69-plus" onclick="changeQuantity('69', 1)">+</button>
+                    <button id="69-minus" disabled onclick="applyDeltaQuantity('69', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="250" />
+                    <button id="69-plus" onclick="applyDeltaQuantity('69', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -353,9 +472,10 @@
                     <div class="product-price">€ 1,00</div>
                 </div>
                 <div id="73" class="quantity-control">
-                    <button id="73-minus" disabled onclick="changeQuantity('73', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="73-plus" onclick="changeQuantity('73', 1)">+</button>
+                    <button id="73-minus" disabled onclick="applyDeltaQuantity('73', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="100" />
+                    <button id="73-plus" onclick="applyDeltaQuantity('73', 1)">+</button>
                 </div>
             </div>
         </div>
@@ -367,9 +487,10 @@
                     <div class="product-price">€ 4,00</div>
                 </div>
                 <div id="129" class="quantity-control">
-                    <button id="129-minus" disabled onclick="changeQuantity('129', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="129-plus" onclick="changeQuantity('129', 1)">+</button>
+                    <button id="129-minus" disabled onclick="applyDeltaQuantity('129', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="400" />
+                    <button id="129-plus" onclick="applyDeltaQuantity('129', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -378,9 +499,10 @@
                     <div class="product-price">€ 6,50</div>
                 </div>
                 <div id="92" class="quantity-control">
-                    <button id="92-minus" disabled onclick="changeQuantity('92', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="92-plus" onclick="changeQuantity('92', 1)">+</button>
+                    <button id="92-minus" disabled onclick="applyDeltaQuantity('92', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="650" />
+                    <button id="92-plus" onclick="applyDeltaQuantity('92', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -389,9 +511,10 @@
                     <div class="product-price">€ 8,00</div>
                 </div>
                 <div id="90" class="quantity-control">
-                    <button id="90-minus" disabled onclick="changeQuantity('90', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="90-plus" onclick="changeQuantity('90', 1)">+</button>
+                    <button id="90-minus" disabled onclick="applyDeltaQuantity('90', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="800" />
+                    <button id="90-plus" onclick="applyDeltaQuantity('90', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -400,9 +523,22 @@
                     <div class="product-price">€ 8,00</div>
                 </div>
                 <div id="166" class="quantity-control">
-                    <button id="166-minus" disabled onclick="changeQuantity('166', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="166-plus" onclick="changeQuantity('166', 1)">+</button>
+                    <button id="166-minus" disabled onclick="applyDeltaQuantity('166', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="800" />
+                    <button id="166-plus" onclick="applyDeltaQuantity('166', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Polenta con spezzatino di capriolo</div>
+                    <div class="product-price">€ 8,00</div>
+                </div>
+                <div id="171" class="quantity-control">
+                    <button id="171-minus" disabled onclick="applyDeltaQuantity('171', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="800" />
+                    <button id="171-plus" onclick="applyDeltaQuantity('171', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -411,9 +547,22 @@
                     <div class="product-price">€ 8,00</div>
                 </div>
                 <div id="167" class="quantity-control">
-                    <button id="167-minus" disabled onclick="changeQuantity('167', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="167-plus" onclick="changeQuantity('167', 1)">+</button>
+                    <button id="167-minus" disabled onclick="applyDeltaQuantity('167', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="800" />
+                    <button id="167-plus" onclick="applyDeltaQuantity('167', 1)">+</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Spezzatino di capriolo</div>
+                    <div class="product-price">€ 8,00</div>
+                </div>
+                <div id="159" class="quantity-control">
+                    <button id="159-minus" disabled onclick="applyDeltaQuantity('159', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="800" />
+                    <button id="159-plus" onclick="applyDeltaQuantity('159', 1)">+</button>
                 </div>
             </div>
         </div>
@@ -425,9 +574,10 @@
                     <div class="product-price">€ 3,50</div>
                 </div>
                 <div id="154" class="quantity-control">
-                    <button id="154-minus" disabled onclick="changeQuantity('154', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="154-plus" onclick="changeQuantity('154', 1)">+</button>
+                    <button id="154-minus" disabled onclick="applyDeltaQuantity('154', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="350" />
+                    <button id="154-plus" onclick="applyDeltaQuantity('154', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -436,9 +586,10 @@
                     <div class="product-price">€ 4,50</div>
                 </div>
                 <div id="170" class="quantity-control">
-                    <button id="170-minus" disabled onclick="changeQuantity('170', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="170-plus" onclick="changeQuantity('170', 1)">+</button>
+                    <button id="170-minus" disabled onclick="applyDeltaQuantity('170', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="450" />
+                    <button id="170-plus" onclick="applyDeltaQuantity('170', 1)">+</button>
                 </div>
             </div>
         </div>
@@ -450,9 +601,10 @@
                     <div class="product-price">€ 9,00</div>
                 </div>
                 <div id="84" class="quantity-control">
-                    <button id="84-minus" disabled onclick="changeQuantity('84', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="84-plus" onclick="changeQuantity('84', 1)">+</button>
+                    <button id="84-minus" disabled onclick="applyDeltaQuantity('84', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="900" />
+                    <button id="84-plus" onclick="applyDeltaQuantity('84', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -461,9 +613,10 @@
                     <div class="product-price">€ 9,00</div>
                 </div>
                 <div id="86" class="quantity-control">
-                    <button id="86-minus" disabled onclick="changeQuantity('86', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="86-plus" onclick="changeQuantity('86', 1)">+</button>
+                    <button id="86-minus" disabled onclick="applyDeltaQuantity('86', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="900" />
+                    <button id="86-plus" onclick="applyDeltaQuantity('86', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -472,9 +625,10 @@
                     <div class="product-price">€ 10,00</div>
                 </div>
                 <div id="151" class="quantity-control">
-                    <button id="151-minus" disabled onclick="changeQuantity('151', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="151-plus" onclick="changeQuantity('151', 1)">+</button>
+                    <button id="151-minus" disabled onclick="applyDeltaQuantity('151', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="1.000" />
+                    <button id="151-plus" onclick="applyDeltaQuantity('151', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -483,9 +637,10 @@
                     <div class="product-price">€ 10,00</div>
                 </div>
                 <div id="152" class="quantity-control">
-                    <button id="152-minus" disabled onclick="changeQuantity('152', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="152-plus" onclick="changeQuantity('152', 1)">+</button>
+                    <button id="152-minus" disabled onclick="applyDeltaQuantity('152', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="1.000" />
+                    <button id="152-plus" onclick="applyDeltaQuantity('152', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -494,9 +649,10 @@
                     <div class="product-price">€ 2,00</div>
                 </div>
                 <div id="83" class="quantity-control">
-                    <button id="83-minus" disabled onclick="changeQuantity('83', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="83-plus" onclick="changeQuantity('83', 1)">+</button>
+                    <button id="83-minus" disabled onclick="applyDeltaQuantity('83', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="200" />
+                    <button id="83-plus" onclick="applyDeltaQuantity('83', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -505,9 +661,10 @@
                     <div class="product-price">€ 2,00</div>
                 </div>
                 <div id="85" class="quantity-control">
-                    <button id="85-minus" disabled onclick="changeQuantity('85', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="85-plus" onclick="changeQuantity('85', 1)">+</button>
+                    <button id="85-minus" disabled onclick="applyDeltaQuantity('85', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="200" />
+                    <button id="85-plus" onclick="applyDeltaQuantity('85', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -516,9 +673,10 @@
                     <div class="product-price">€ 1,00</div>
                 </div>
                 <div id="31" class="quantity-control">
-                    <button id="31-minus" disabled onclick="changeQuantity('31', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="31-plus" onclick="changeQuantity('31', 1)">+</button>
+                    <button id="31-minus" disabled onclick="applyDeltaQuantity('31', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="100" />
+                    <button id="31-plus" onclick="applyDeltaQuantity('31', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -527,9 +685,10 @@
                     <div class="product-price">€ 1,00</div>
                 </div>
                 <div id="32" class="quantity-control">
-                    <button id="32-minus" disabled onclick="changeQuantity('32', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="32-plus" onclick="changeQuantity('32', 1)">+</button>
+                    <button id="32-minus" disabled onclick="applyDeltaQuantity('32', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="100" />
+                    <button id="32-plus" onclick="applyDeltaQuantity('32', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -538,9 +697,10 @@
                     <div class="product-price">€ 3,00</div>
                 </div>
                 <div id="30" class="quantity-control">
-                    <button id="30-minus" disabled onclick="changeQuantity('30', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="30-plus" onclick="changeQuantity('30', 1)">+</button>
+                    <button id="30-minus" disabled onclick="applyDeltaQuantity('30', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="300" />
+                    <button id="30-plus" onclick="applyDeltaQuantity('30', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -549,9 +709,10 @@
                     <div class="product-price">€ 4,00</div>
                 </div>
                 <div id="136" class="quantity-control">
-                    <button id="136-minus" disabled onclick="changeQuantity('136', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="136-plus" onclick="changeQuantity('136', 1)">+</button>
+                    <button id="136-minus" disabled onclick="applyDeltaQuantity('136', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="400" />
+                    <button id="136-plus" onclick="applyDeltaQuantity('136', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -560,9 +721,10 @@
                     <div class="product-price">€ 3,00</div>
                 </div>
                 <div id="2" class="quantity-control">
-                    <button id="2-minus" disabled onclick="changeQuantity('2', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="2-plus" onclick="changeQuantity('2', 1)">+</button>
+                    <button id="2-minus" disabled onclick="applyDeltaQuantity('2', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="300" />
+                    <button id="2-plus" onclick="applyDeltaQuantity('2', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -571,9 +733,10 @@
                     <div class="product-price">€ 3,00</div>
                 </div>
                 <div id="29" class="quantity-control">
-                    <button id="29-minus" disabled onclick="changeQuantity('29', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="29-plus" onclick="changeQuantity('29', 1)">+</button>
+                    <button id="29-minus" disabled onclick="applyDeltaQuantity('29', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="300" />
+                    <button id="29-plus" onclick="applyDeltaQuantity('29', 1)">+</button>
                 </div>
             </div>
             <div class="product-item">
@@ -582,9 +745,10 @@
                     <div class="product-price">€ 1,00</div>
                 </div>
                 <div id="79" class="quantity-control">
-                    <button id="79-minus" disabled onclick="changeQuantity('79', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="79-plus" onclick="changeQuantity('79', 1)">+</button>
+                    <button id="79-minus" disabled onclick="applyDeltaQuantity('79', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="100" />
+                    <button id="79-plus" onclick="applyDeltaQuantity('79', 1)">+</button>
                 </div>
             </div>
         </div>
@@ -596,9 +760,10 @@
                     <div class="product-price">€ 3,00</div>
                 </div>
                 <div id="169" class="quantity-control">
-                    <button id="169-minus" disabled onclick="changeQuantity('169', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="169-plus" onclick="changeQuantity('169', 1)">+</button>
+                    <button id="169-minus" disabled onclick="applyDeltaQuantity('169', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="300" />
+                    <button id="169-plus" onclick="applyDeltaQuantity('169', 1)">+</button>
                 </div>
             </div>
         </div>
@@ -610,9 +775,10 @@
                     <div class="product-price">€ 1,00</div>
                 </div>
                 <div id="153" class="quantity-control">
-                    <button id="153-minus" disabled onclick="changeQuantity('153', -1)">-</button>
-                    <input type="text" class="quantity-input" value="0" readonly>
-                    <button id="153-plus" onclick="changeQuantity('153', 1)">+</button>
+                    <button id="153-minus" disabled onclick="applyDeltaQuantity('153', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="100" />
+                    <button id="153-plus" onclick="applyDeltaQuantity('153', 1)">+</button>
                 </div>
             </div>
         </div>
@@ -632,6 +798,9 @@
             <div class="input-group-centered">
                 <button id="generateQrBtn">Genera QR Code da mostrare alla cassa</button>
             </div>
+            <div class="input-group-centered">
+                <div id="totalAmount" class="product-name"></div>
+            </div>
         </div>
         <div class="qrcontainer">
             <div class="img-wrapper-base">
@@ -649,8 +818,12 @@
             const sedutiRadioEl = document.getElementById('SED');
             const copertoQuantityControl = document.getElementById('153');
             const copertoMinusButton = document.getElementById('153-minus');
+            const totalAmountEl = document.getElementById('totalAmount');
             var copertoQuantityBackup;
 
+            function onlyDigitsKeyPress(pCharCode) {
+                return pCharCode >= 48 && pCharCode <= 57;
+            }
             function isNotNullDefined(pElement) {
                 return (pElement !== null && pElement !== "undefined");
             }
@@ -688,30 +861,49 @@
                         if (pNewQuantity === 0 && copertoInput.value > 0) {
                             copertoQuantityBackup = copertoInput.value;
                         }
-                        setNewQuantity(copertoInput, copertoMinusButton, pNewQuantity);
+                        setNewQuantity(copertoInput, pNewQuantity);
                     }
                 }
             }
-            function changeQuantity(id, delta) {
+            function applyDeltaQuantity(id, delta) {
                 const quantityControl = document.getElementById(id);
-                const minusButton = document.getElementById(id + '-minus');
                 const input = quantityControl.querySelector('.quantity-input');
                 let currentValue = parseInt(input.value);
-
-                // Ensure the value is not less than zero
-                const newValue = currentValue + delta;
-                if (newValue >= 0) {
-                    setNewQuantity(input, minusButton, newValue);
-                }
-                if (id === '153') {
-                    setRadioSeduti((newValue > 0));
+                setNewQuantity(input, currentValue + delta);
+            }
+            function adjustQuantityValue(pInputText) {
+                try {
+                    var valueInt = isNaN(pInputText.value)? 0 : Number(pInputText.value);
+                    //console.log('pInputText.value = ' + pInputText.value + ' -- valueInt = ' + valueInt);
+                    setNewQuantity(pInputText, valueInt);
+                } catch (error) {
+                    console.error("An error occurred in setNewQuantityFromTxt: ", error.message);
                 }
             }
-            function setNewQuantity(pInputText, pMinusButton, pNewQuantity) {
-                pInputText.value = pNewQuantity;
-                // in case of changes the QR must be invalidated
-                qrcodeDiv.innerHTML = "";
-                pMinusButton.disabled = (pNewQuantity <= 0);
+
+            function setNewQuantity(pInputText, pNewQuantity) {
+                if (pInputText !== nominativoInput) {
+                // Ensure the value is between 0 and 999
+                    var newValue = Math.min(999, Math.max(0, pNewQuantity));
+                    //console.log(pNewQuantity + ' -- ' + newValue);
+                    if (pInputText !== 'NaN' && pInputText.value !== newValue) {
+                        pInputText.value = newValue;
+                        qrcodeDiv.innerHTML = "";
+						totalAmountEl.innerHTML = "";
+                        const id = pInputText.parentNode.id;
+                        const minusButton = document.getElementById(id + '-minus');
+                        if (isNotNullDefined(minusButton)) {
+                            minusButton.disabled = (pNewQuantity <= 0);
+                        }
+                        const plusButton = document.getElementById(id + '-plus');
+                        if (isNotNullDefined(plusButton)) {
+                            plusButton.disabled = (pNewQuantity >= 999);
+                        }
+                        if (id === '153') {
+                            setRadioSeduti((newValue > 0));
+                        }
+                    }
+                }
             }
             document.addEventListener('DOMContentLoaded', () => {
                 let qrcode = null;
@@ -722,14 +914,22 @@
                 function generateQRCode() {
                     qrcodeDiv.innerHTML = "";
                     var filteredArray = document.getElementsByClassName("quantity-control");
+					var totalAmountCents = 0;
                     const quantytyMap = new Map();
                     for (const el of filteredArray) {
-                        let currentValue = parseInt(el.querySelector('.quantity-input').value);
+					    const unitPriceEl = el.querySelector('.unit-price-cents');
+                        let unitPriceCents = (isNotNullDefined(unitPriceEl))? Number(unitPriceEl.value) : 0;
+                        let currentValue = Number(el.querySelector('.quantity-input').value);
+                        console.log("unitPriceCents = " + unitPriceCents + " - currentValue = " + currentValue);
                         if (currentValue > 0) {
                             var currVal = quantytyMap.get(currentValue) || '';
                             quantytyMap.set(currentValue, currVal + '-' + el.id);
+							totalAmountCents += unitPriceCents * currentValue;
                         }
                     }
+					const totalAmountEur = totalAmountCents / 100;
+                    console.log("totalAmountEur = " + totalAmountEur + " -- " + totalAmountEur.toLocaleString("it-IT", {style:"currency", currency:"EUR"}));
+					totalAmountEl.innerHTML = "TOTALE: " + totalAmountEur.toLocaleString("it-IT", {style:"currency", currency:"EUR"});
                     var ordineStreamPart = '';
                     quantytyMap.forEach(function (value, key) {
                         ordineStreamPart += ' ' + key + value;
@@ -845,6 +1045,43 @@
                     return t;
                 }};
 
+        </script>
+        <script>
+document.querySelectorAll('.inc, .dec').forEach(button => {
+    let pressTimer;
+    let longPress = false;
+
+    button.addEventListener('mousedown', () => {
+        longPress = false;
+        pressTimer = setTimeout(() => {
+            longPress = true;
+        }, 1000);
+    });
+
+    button.addEventListener('mouseup', () => {
+        clearTimeout(pressTimer);
+        const quantitySpan = button.parentElement.querySelector('.quantity');
+        let current = parseInt(quantitySpan.textContent);
+        let delta = longPress ? 10 : 1;
+        if (button.classList.contains('inc')) {
+            quantitySpan.textContent = current + delta;
+        } else {
+            quantitySpan.textContent = Math.max(0, current - delta);
+        }
+    });
+
+    button.addEventListener('mouseleave', () => {
+        clearTimeout(pressTimer);
+    });
+});
+        </script>
+        <script>
+    $(function(){
+        $(document).on('click','input[type=text]',function(){ this.select(); });
+    });
+    $(function(){
+        $(document).on('blur','input[type=text]',function(){ adjustQuantityValue(this); });
+    });
         </script>
 
     </body>
