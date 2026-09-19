@@ -571,6 +571,21 @@
             </div>
         </div>
         <div class="product-list">
+            <h2>Insalata / Insalatona</h2>
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="product-name">Giardiniera agrodolce</div>
+                    <div class="product-price">€ 4,50</div>
+                </div>
+                <div id="170" class="quantity-control">
+                    <button id="170-minus" disabled onclick="applyDeltaQuantity('170', -1)">-</button>
+                    <input class="quantity-input" type="text" pattern="[0-9]*" inputmode="numeric" onkeypress="return onlyDigitsKeyPress(event.charCode)" value="0"/>
+                    <input class="unit-price-cents"type="hidden" value="450" />
+                    <button id="170-plus" onclick="applyDeltaQuantity('170', 1)">+</button>
+                </div>
+            </div>
+        </div>
+        <div class="product-list">
             <h2>Bevanda / Bar</h2>
             <div class="product-item">
                 <div class="product-info">
